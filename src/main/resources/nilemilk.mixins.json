@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.nile.milkfix.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MilkBucketItemMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
