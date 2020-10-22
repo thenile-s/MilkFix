@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "id": "nilemilk",
-  "version": "1.0",
+  "version": "2.0",
 
   "name": "Nile Milk Fix",
-  "description": "Fixes the bug where beneficial status effects are removed after drinking milk.",
+  "description": "Allows specifying which status effects to remove when drinking milk with a configuration file.",
   "authors": [
     "The Nile"
   ],
