@@ -5,13 +5,13 @@
 Change the behaviour of milk; remove/keep effects you choose!
 
 ## Config file
-/config/milkfix
+Located in the game directory in /config/milkfix  
 The first line should be either 'whitelist' or 'blacklist' depending on how you wish to filter the status effects. The following lines should include the namespaced ids of the effects to be used by the filter.
 
 ### Example:
-blacklist
-minecraft:poison
-minecraft:weakness
+blacklist  
+minecraft:poison  
+minecraft:weakness  
 
 This configuration will remove vanilla poison and weakness status effects when milk is drunk.
 
