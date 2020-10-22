@@ -38,7 +38,7 @@ public class MilkBucketItemMixin{
              if (!world.isClient) {
                 StatusEffectInstance[] effects = user.getStatusEffects().toArray(new StatusEffectInstance[user.getStatusEffects().size()]);
                  for (int i = 0; i < effects.length; i++) {
-                     if(!effects[i].getEffectType().isBeneficial())
+                     if(MilkFix.milkRemoveEffects.contains(effects[i].getEffectType()))
                      {
                          user.removeStatusEffect(effects[i].getEffectType());
                      }
