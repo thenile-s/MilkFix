@@ -16,11 +16,8 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.item.MilkBucketItem;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.feature.ConfiguredFeatures.Configs;
 
 public class MilkFix implements  ModInitializer {
 
@@ -32,11 +29,11 @@ public static final Logger logger = LogManager.getLogger();
 
     public static final Set<String> effectsToAdd = new HashSet<String>();
 
-    public  static final Set<StatusEffect> milkRemoveEffects = new HashSet<StatusEffect>();
-//TODO implement config registering of effects to remove
+    public static boolean blacklist;
+
+    public  static final Set<StatusEffect> milkAffectedEffects = new HashSet<StatusEffect>();
     @Override
     public void onInitialize() {
-        // TODO Auto-generated method stub
         Registry.register(Registry.ITEM, new Identifier(modid, "rotten_milk_bucket"), ROTTEN_MILK_BUCKET);
 
         Path cfgFile = FabricLoader.getInstance().getConfigDir().resolve(modid);
@@ -44,25 +41,37 @@ public static final Logger logger = LogManager.getLogger();
         try {
             BufferedReader reader = Files.newBufferedReader(cfgFile);
             String line = null;
+            line = reader.readLine();
+            if(line.equals("blacklist"))
+            {
+                blacklist = true;
+            }
+            else if (line.equals("whitelist"))
+            {
+                blacklist = false;
+            }
+            else{
+                throw new Exception("Not specified whether a whitelist or blacklist is used!");
+            }
             while ((line = reader.readLine()) != null)  
             {
                 effectsToAdd.add(line);
             }
             logger.info("MilkFix config found!");
         } catch (Exception e) {
-            //TODO: handle exception
-            logger.error("Error loading config file for MilkFix. Loading default config.", e);
+            logger.error("Error loading config file for MilkFix. Loading default config: blacklisting vanilla debuffs.", e);
             effectsToAdd.clear();
-            milkRemoveEffects.add(StatusEffects.POISON);
-            milkRemoveEffects.add(StatusEffects.BAD_OMEN);
-            milkRemoveEffects.add(StatusEffects.BLINDNESS);
-            milkRemoveEffects.add(StatusEffects.SLOWNESS);
-            milkRemoveEffects.add(StatusEffects.WEAKNESS);
-            milkRemoveEffects.add(StatusEffects.WITHER);
-            milkRemoveEffects.add(StatusEffects.HUNGER);
-            milkRemoveEffects.add(StatusEffects.MINING_FATIGUE);
-            milkRemoveEffects.add(StatusEffects.NAUSEA);
-            milkRemoveEffects.add(StatusEffects.UNLUCK);
+            milkAffectedEffects.add(StatusEffects.POISON);
+            milkAffectedEffects.add(StatusEffects.BAD_OMEN);
+            milkAffectedEffects.add(StatusEffects.BLINDNESS);
+            milkAffectedEffects.add(StatusEffects.SLOWNESS);
+            milkAffectedEffects.add(StatusEffects.WEAKNESS);
+            milkAffectedEffects.add(StatusEffects.WITHER);
+            milkAffectedEffects.add(StatusEffects.HUNGER);
+            milkAffectedEffects.add(StatusEffects.MINING_FATIGUE);
+            milkAffectedEffects.add(StatusEffects.NAUSEA);
+            milkAffectedEffects.add(StatusEffects.UNLUCK);
+            blacklist = true;
         }
 
         Registry.STATUS_EFFECT.forEach((se)->{
@@ -74,11 +83,13 @@ public static final Logger logger = LogManager.getLogger();
         });
 
         RegistryEntryAddedCallback.event(Registry.STATUS_EFFECT).register(new StatusEffectAddedCallback());
+
+        //TODO: maybe check if all effects in the config are registered in the game
     }
     
     public static void addStatusEffectToRemove(StatusEffect effect)
     {
-        milkRemoveEffects.add(effect);
+        milkAffectedEffects.add(effect);
     }
 
     public static void StatusEffectAdded(StatusEffect effect, Identifier id)

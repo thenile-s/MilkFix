@@ -8,7 +8,6 @@ public class StatusEffectAddedCallback implements RegistryEntryAddedCallback<Sta
 
     @Override
     public void onEntryAdded(int rawId, Identifier id, StatusEffect object) {
-        // TODO Auto-generated method stub
         MilkFix.StatusEffectAdded(object, id);
     }
     

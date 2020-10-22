@@ -1,11 +1,8 @@
 package net.nile.milkfix.mixins;
 
-import java.util.Collection;
-
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.advancement.criterion.Criteria;
@@ -37,11 +34,22 @@ public class MilkBucketItemMixin{
        
              if (!world.isClient) {
                 StatusEffectInstance[] effects = user.getStatusEffects().toArray(new StatusEffectInstance[user.getStatusEffects().size()]);
-                 for (int i = 0; i < effects.length; i++) {
-                     if(MilkFix.milkRemoveEffects.contains(effects[i].getEffectType()))
-                     {
-                         user.removeStatusEffect(effects[i].getEffectType());
-                     }
+                 if(MilkFix.blacklist)
+                 {
+                    for (int i = 0; i < effects.length; i++) {
+                        if(MilkFix.milkAffectedEffects.contains(effects[i].getEffectType()))
+                        {
+                            user.removeStatusEffect(effects[i].getEffectType());
+                        }
+                    }
+                 }
+                 else{
+                    for (int i = 0; i < effects.length; i++) {
+                        if(!MilkFix.milkAffectedEffects.contains(effects[i].getEffectType()))
+                        {
+                            user.removeStatusEffect(effects[i].getEffectType());
+                        }
+                    }
                  }
              }
 

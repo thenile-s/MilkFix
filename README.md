@@ -2,11 +2,30 @@
 
 ## What it does
 
-Fixes a bug where milk would remove beneficial status effects upon use.
+Change the behaviour of milk; remove/keep effects you choose!
+
+## Config file
+/config/milkfix
+The first line should be either 'whitelist' or 'blacklist' depending on how you wish to filter the status effects. The following lines should include the namespaced ids of the effects to be used by the filter.
+
+### Example:
+blacklist
+minecraft:poison
+minecraft:weakness
+
+This configuration will remove vanilla poison and weakness status effects when milk is drunk.
+
+### Reverting to vanilla behaviour:
+blacklist
+
+This configuration has the same behaviour as vanilla milk
+
+### If the config is missing
+The mod will use its default config of blacklisting vanilla debuffs.
 
 ## Rotten mix
-To compensate for the removed functionality, a new item, 'Rotten Mix' is crafted with rotten flesh, a spider eye and a slimeball. It acts as the old milk, removing all status effects upon use.
+To compensate for the removal of the old milk, a new item, 'Rotten Mix' is crafted with rotten flesh, a spider eye and a slimeball. It acts as the old milk, removing all status effects upon use.
 
 ## Licence
-https://creativecommons.org/licenses/by/4.0/legalcode
-I would really appreciate it if you would contact me if you happen to use this mod in a modpack or modify the code or put it up for download somewhere.
+https://creativecommons.org/licenses/by-nc/4.0/legalcode
+TL;DR; You may distribute and modify this mod non-commercially, as long as you credit me and indicate the changes you have made.

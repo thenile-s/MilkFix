@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "nilemilk",
-  "version": "2.0",
+  "version": "2.1",
 
   "name": "Nile Milk Fix",
   "description": "Allows specifying which status effects to remove when drinking milk with a configuration file.",
@@ -9,11 +9,11 @@
     "The Nile"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://github.com/thenile-s/MilkFix/blob/master/README.md",
+    "sources": "https://github.com/thenile-s/MilkFix.git"
   },
 
-  "license": "CC0-1.0",
+  "license": "https://creativecommons.org/licenses/by-nc/4.0/legalcode",
   "icon": "assets/nilemilk/icon.png",
 
   "environment": "*",
