@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "nilemilk",
-  "version": "2.1",
+  "version": "2.2",
 
   "name": "Nile Milk Fix",
   "description": "Allows specifying which status effects to remove when drinking milk with a configuration file.",

@@ -57,6 +57,7 @@ public static final Logger logger = LogManager.getLogger();
             {
                 effectsToAdd.add(line);
             }
+            reader.close();
             logger.info("MilkFix config found!");
         } catch (Exception e) {
             logger.error("Error loading config file for MilkFix. Loading default config: blacklisting vanilla debuffs.", e);
@@ -71,6 +72,10 @@ public static final Logger logger = LogManager.getLogger();
             milkAffectedEffects.add(StatusEffects.MINING_FATIGUE);
             milkAffectedEffects.add(StatusEffects.NAUSEA);
             milkAffectedEffects.add(StatusEffects.UNLUCK);
+            milkAffectedEffects.add(StatusEffects.INVISIBILITY);
+            milkAffectedEffects.add(StatusEffects.LEVITATION);
+            milkAffectedEffects.add(StatusEffects.SLOW_FALLING);
+            milkAffectedEffects.add(StatusEffects.GLOWING);
             blacklist = true;
         }
 
