@@ -38,8 +38,7 @@ public static final Logger logger = LogManager.getLogger();
 
         Path cfgFile = FabricLoader.getInstance().getConfigDir().resolve(modid);
 
-        try {
-            BufferedReader reader = Files.newBufferedReader(cfgFile);
+        try (BufferedReader reader = Files.newBufferedReader(cfgFile)){
             String line = null;
             line = reader.readLine();
             if(line.equals("blacklist"))
@@ -57,7 +56,6 @@ public static final Logger logger = LogManager.getLogger();
             {
                 effectsToAdd.add(line);
             }
-            reader.close();
             logger.info("MilkFix config found!");
         } catch (Exception e) {
             logger.error("Error loading config file for MilkFix. Loading default config: blacklisting vanilla debuffs.", e);
